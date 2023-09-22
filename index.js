@@ -1,26 +1,4 @@
-/* 
-1. criar uma nova reserva
-    - nome do solicitante
-    - data
-    - horario
-    - sala
-    - finalidade da reuniao
-2. visualizar a lista de todas as reservas com os detalhes 
-3. editar nome do solicitante
-4. editar data
-5. editar horario
-6. editar sala
-7. editar finalidade da reuniao
-8. cancelar reserva
-9. mensagem de sucesso
-10. mensagem de erro
-
----- colocar a reserva dentro de um objeto e todas as reservas dentro de um array?
-*/
-
-// VARIÁVEIS
 const reservas = [];
-
 
 function criarReserva() {
     const nome = prompt('Digite o nome do solicitante/responsável pela reserva da sala.');
@@ -48,7 +26,7 @@ function criarReserva() {
 function visualizarReservas() {
     if (reservas.length === 0){
         console.log('Não há nenhuma reserva agendada');
-        return;
+        exibirMenu();
     }
     console.log('Lista de reservas:');
     for(let i = 0; i < reservas.length; i++){
@@ -164,6 +142,7 @@ function editarReserva() {
         return;
       default:
         console.log("Opção inválida. Tente novamente.");
+        exibirMenu();
     }
   
   }
