@@ -18,109 +18,123 @@
 ---- colocar a reserva dentro de um objeto e todas as reservas dentro de um array?
 */
 
-let mensagemDeErro = console.log('Erro, reserva não criada/alterada. Tente novamente. Preencha todos os dados corretamente.');
+// VARIÁVEIS
 const reservas = [];
 
 
-function criarReserva(nome, data, horario, sala, finalidade) {
-    while (outraReserva === 'S'){
-    nome = prompt('Digite o nome do solicitante/responsável pela reserva da sala.');
-    data = prompt('Data da reserva. (DD/MM/AAAA)');
-    horario = prompt('Horário da reserva. (HH:MM)');
-    sala = prompt('Número da sala de reuniões');
-    finalidade = prompt('Finalidade da reunião');
-    let outraReserva = prompt('Deseja fazer outra reserva? Digite S para SIM ou N para não');
-    
-    if (nome === ""){
-        mensagemDeErro
-    } else if (data === ""){
-        mensagemDeErro
-    } else if (horario === ""){
-        mensagemDeErro
-    } else if (sala === ""){
-        mensagemDeErro
-    } else if (finalidade === "") {
-        mensagemDeErro
-    } else {
-        console.log('Reserva criada com sucesso!')
-    }
+function criarReserva() {
+    const nome = prompt('Digite o nome do solicitante/responsável pela reserva da sala.');
+    const data = prompt('Data da reserva. (DD/MM/AAAA)');
+    const horario = prompt('Horário da reserva. (HH:MM)');
+    const sala = prompt('Número da sala de reuniões');
+    const finalidade = prompt('Finalidade da reunião');
+        if (nome === "" || data === "" || horario === "" || sala === "" || finalidade === ""){
+            console.log('Erro, reserva não criada/alterada. Tente novamente. Preencha todos os dados corretamente.');  
+            return            
+        }
     const novaReserva = {
         nome: nome,
         data: data,
         horario: horario,
         sala: sala,
         finalidade: finalidade,
-        }}
+        }
+    
     reservas.push(novaReserva);
-    console.log(reservas);
-    exibirMenu();
-    }   
+    console.log('Reserva criada com sucesso!')
+    exibirMenu();  
+}   
 
-  
-  function visualizarReservas() {
-    console.log(reservas);
+function visualizarReservas() {
+    if (reservas.length === 0){
+        console.log('Não há nenhuma reserva agendada');
+        return;
+    }
+    console.log('Lista de reservas:');
+    for(let i = 0; i < reservas.length; i++){
+        console.log(`Reserva ${i + 1}:`);
+        console.log(`Nome: ${reservas[i].nome}`);
+        console.log(`Data: ${reservas[i].data}`);
+        console.log(`Horário: ${reservas[i].horario}`);
+        console.log(`Sala: ${reservas[i].sala}`);
+        console.log(`Finalidade: ${reservas[i].finalidade}`);
+    }
     exibirMenu();
-  }
-  
-  function editarReserva() {
-    console.log('Digite o número da opção do que você deseja alterar');
-    console.log('Digite 1 para NOME');
-    console.log('Digite 2 para DATA');
-    console.log('Digite 3 para HORARIO')
-    console.log('Digite 4 para SALA');
-    console.log('Digite 5 para FINALIDADE');
-    let pergunta = Number(prompt('Qual dado você deseja alterar?'));
+}
 
-    // TROCAR ISSO AQUI POR SWITCH CASE
-    if(!pergunta) {
-        mensagemDeErro;
-    } else if (pergunta === 1) {
-        let novoNome = prompt('Digite o novo nome do solicitante/responsável pela reserva da sala.'); // NOME
+function editarReserva() {
+    let qualReserva = Number(prompt('Digite o número da reserva que você deseja alterar:'));
+    let pergunta = Number(prompt('Digite o número da opção do que você deseja alterar \n1. para NOME \n2. para DATA \n3. para HORARIO \n4. para SALA \n5. para FINALIDADE:'));
+    
+     switch (pergunta) {
+        case !pergunta:
+            console.log('Erro! Preencha os dados corretamente!')
+            break;
+        case 1:
+            let novoNome = prompt('Digite o novo nome do solicitante/responsável pela reserva da sala.'); 
             if (!novoNome){
-            mensagemDeErro;
+                console.log('Erro! Preencha os dados corretamente!')
             } else {
-            console.log('Nome alterado com sucesso!');
-    }}
-        else if (pergunta === 2){ 
-        let novaData = prompt('Digite a nova data da reserva da sala (DD/MM/AAAA)'); // DATA
+                reservas[qualReserva -1].nome = novoNome;
+                console.log('Nome alterado com sucesso!');
+            }        
+            break;
+        case 2:
+            let novaData = prompt('Digite a nova data da reserva da sala (DD/MM/AAAA)'); 
             if (!novaData){
-                mensagemDeErro;
+                console.log('Erro! Preencha os dados corretamente!');
             } else {
+                reservas[qualReserva -1].data = novaData;
                 console.log('Data alterada com sucesso!');
             }
-        }
-        else if (pergunta === 3){
-        let novoHorario = prompt('Digite o novo horário da reserva da sala (HH:MM)'); // HORARIO
+            break;
+        case 3:
+            let novoHorario = prompt('Digite o novo horário da reserva da sala (HH:MM)'); 
             if (!novoHorario) {
-                mensagemDeErro;
+                console.log('Erro! Preencha os dados corretamente!');
             } else {
+                reservas[qualReserva -1].horario = novoHorario;
                 console.log('Horário alterado com sucesso!');
             }
-        }
-        else if (pergunta === 4){
-        let novaSala = prompt('Digite o número da nova sala de reuniões'); // SALA
+            break;
+        case 4:
+            let novaSala = prompt('Digite o número da nova sala de reuniões');
             if (!novaSala) {
-                mensagemDeErro;
+                console.log('Erro! Preencha os dados corretamente!');
             } else {
+                reservas[qualReserva -1].sala = novaSala;
                 console.log('Sala alterada com sucesso!');
             }
-        }
-        else if (pergunta === 5){
-        let novaFinalidade = prompt('Digite a nova finalidade da reunião'); // FINALIDADE
+            break;
+        case 5:
+            let novaFinalidade = prompt('Digite a nova finalidade da reunião');
             if (!novaFinalidade){
-                mensagemDeErro;
+                console.log('Erro! Preencha os dados corretamente!');
             } else {
+                reservas[qualReserva -1].finalidade = novaFinalidade;
                 console.log('Finalidade da reunião alterada com sucesso!');
             }
-    }
-    else {
-        console.log('Erro, refaça a operação!');
+            break;
+        default:
+            console.log('Erro, refaça a operação!');
+            break;
     }
     exibirMenu();
-    }
+    } 
   
   function deletarReserva() {
-    // Implementar exclusão de reserva
+    let qualReservaDeletar = Number(prompt('Digite o número da reserva que você deseja deletar ou 9999 para todas:'));
+    if (qualReservaDeletar < 1 || qualReservaDeletar === ''){
+        console.log('Erro! Refaça a operação!');
+        } else if (qualReservaDeletar === 9999){
+            reservas.splice(0, reservas.length);
+            console.log('Todas as reservas foram apagadas com sucesso!');
+        }
+        else {
+        reservas.splice(qualReservaDeletar - 1, 1);
+        console.log('Reserva deletada com sucesso!');
+    }
+    exibirMenu();
   }
   
   function exibirMenu() {
@@ -143,7 +157,7 @@ function criarReserva(nome, data, horario, sala, finalidade) {
         editarReserva();
         break;
       case "4":
-        // Chamar função de deletar reserva
+        deletarReserva();
         break;
       case "5":
         console.log("Saindo do programa. Até logo!");
@@ -152,7 +166,6 @@ function criarReserva(nome, data, horario, sala, finalidade) {
         console.log("Opção inválida. Tente novamente.");
     }
   
-    // Chamar função de exibir menu novamente
   }
   
   exibirMenu();
