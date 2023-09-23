@@ -142,9 +142,6 @@ function editarReserva() {
         return;
       default:
         console.log("Opção inválida. Tente novamente.");
-        exibirMenu();
-    }
-  
-  }
-  
-  exibirMenu();
+    }  
+}
+exibirMenu();
